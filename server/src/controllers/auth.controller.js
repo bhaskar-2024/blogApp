@@ -3,6 +3,13 @@ import { errorHandler } from "../utils/error.js";
 import bcryptjs from "bcryptjs"
 import jwt from "jsonwebtoken"
 
+const options = {
+  httpOnly: true,
+  secure: true,
+  sameSite: "None",
+  partitioned : true
+};
+
 export const signup = async (req, res, next) => {
     const { username, email, password } = req.body;
   
@@ -58,9 +65,7 @@ export const signup = async (req, res, next) => {
   
       res
         .status(200)
-        .cookie('access_token', token, {
-          httpOnly: true,
-        })
+        .cookie('access_token', token, options)
         .json(rest);
     } catch (error) {
       next(error);
@@ -79,9 +84,7 @@ export const signup = async (req, res, next) => {
         const { password, ...rest } = user._doc;
         res
           .status(200)
-          .cookie('access_token', token, {
-            httpOnly: true,
-          })
+          .cookie('access_token', token, options)
           .json(rest);
       } else {
         const generatedPassword =
@@ -104,9 +107,7 @@ export const signup = async (req, res, next) => {
         const { password, ...rest } = newUser._doc;
         res
           .status(200)
-          .cookie('access_token', token, {
-            httpOnly: true,
-          })
+          .cookie('access_token', token, options)
           .json(rest);
       }
     } catch (error) {

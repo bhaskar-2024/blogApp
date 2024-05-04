@@ -1,5 +1,10 @@
 import Comment from '../models/comment.model.js';
-
+const options = {
+  httpOnly: true,
+  secure: true,
+  sameSite: "None",
+  partitioned : true
+};
 export const createComment = async (req, res, next) => {
   try {
     const { content, postId, userId } = req.body;

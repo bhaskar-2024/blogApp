@@ -2,9 +2,13 @@ import bcryptjs from 'bcryptjs';
 import { errorHandler } from '../utils/error.js';
 import User from '../models/user.model.js';
 
-export const test = (req, res) => {
-  res.json({ message: 'API is working!' });
+const options = {
+  httpOnly: true,
+  secure: true,
+  sameSite: "None",
+  partitioned : true
 };
+
 
 export const updateUser = async (req, res, next) => {
   if (req.user.id !== req.params.userId) {
@@ -69,7 +73,7 @@ export const deleteUser = async (req, res, next) => {
 export const signout = (req, res, next) => {
   try {
     res
-      .clearCookie('access_token')
+      .clearCookie('access_token' ,options)
       .status(200)
       .json('User has been signed out');
   } catch (error) {
