@@ -11,6 +11,7 @@ export default defineConfig({
       '/api': {
         target: 'https://blogapp-6fcx.onrender.com',
         secure: false,
+        changeOrigin: true,
       },
     },
   },
