@@ -6,6 +6,7 @@ import Comment from "./Comment";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 
 export default function CommentSection({ postId }) {
+  
   const { currentUser } = useSelector((state) => state.user);
   const [comment, setComment] = useState("");
   const [commentError, setCommentError] = useState(null);
@@ -13,14 +14,14 @@ export default function CommentSection({ postId }) {
   const [showModal, setShowModal] = useState(false);
   const [commentToDelete, setCommentToDelete] = useState(null);
   const navigate = useNavigate();
-
+  const backend = import.meta.env.VITE_BACKEND_URL;
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (comment.length > 200) {
       return;
     }
     try {
-      const res = await fetch("/api/comments/create", {
+      const res = await fetch(`${backend}/api/comments/create`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -45,7 +46,7 @@ export default function CommentSection({ postId }) {
   useEffect(() => {
     const getComments = async () => {
       try {
-        const res = await fetch(`/api/comments/getPostComments/${postId}`);
+        const res = await fetch(`${backend}/api/comments/getPostComments/${postId}`);
         if (res.ok) {
           const data = await res.json();
           setComments(data);
@@ -63,7 +64,7 @@ export default function CommentSection({ postId }) {
         navigate("/sign-in");
         return;
       }
-      const res = await fetch(`/api/comments/likeComment/${commentId}`, {
+      const res = await fetch(`${backend}/api/comments/likeComment/${commentId}`, {
         method: "PUT",
       });
       if (res.ok) {
@@ -100,7 +101,7 @@ export default function CommentSection({ postId }) {
         navigate("/sign-in");
         return;
       }
-      const res = await fetch(`/api/comments/deleteComment/${commentId}`, {
+      const res = await fetch(`${backend}/api/comments/deleteComment/${commentId}`, {
         method: "DELETE",
       });
       if (res.ok) {

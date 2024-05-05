@@ -23,10 +23,10 @@ export default function Header() {
       setSearchTerm(searchTermFromUrl);
     }
   }, [location.search]);
-
+  const backend = import.meta.env.VITE_BACKEND_URL;
   const handleSignout = async () => {
     try {
-      const res = await fetch("/api/user/signout", {
+      const res = await fetch(`${backend}/api/user/signout`, {
         method: "POST",
       });
       const data = await res.json();

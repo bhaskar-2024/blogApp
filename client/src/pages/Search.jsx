@@ -18,7 +18,7 @@ export default function Search() {
   const location = useLocation();
 
   const navigate = useNavigate();
-
+  const backend = import.meta.env.VITE_BACKEND_URL;
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
     const searchTermFromUrl = urlParams.get('searchTerm');
@@ -36,7 +36,7 @@ export default function Search() {
     const fetchPosts = async () => {
       setLoading(true);
       const searchQuery = urlParams.toString();
-      const res = await fetch(`/api/post/getposts?${searchQuery}`);
+      const res = await fetch(`${backend}/api/post/getposts?${searchQuery}`);
       if (!res.ok) {
         setLoading(false);
         return;
@@ -85,7 +85,7 @@ export default function Search() {
     const urlParams = new URLSearchParams(location.search);
     urlParams.set('startIndex', startIndex);
     const searchQuery = urlParams.toString();
-    const res = await fetch(`/api/post/getposts?${searchQuery}`);
+    const res = await fetch(`${backend}/api/post/getposts?${searchQuery}`);
     if (!res.ok) {
       return;
     }

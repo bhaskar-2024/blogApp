@@ -17,7 +17,7 @@ export default function SignIn() {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value.trim() });
   };
-
+  const backend = import.meta.env.VITE_BACKEND_URL;
   const userdata = useSelector((state) => state.user.currentUser);
   useEffect(() => {
     if(userdata) {
@@ -33,7 +33,7 @@ export default function SignIn() {
     }
     try {
       dispatch(signInStart());
-      const res = await fetch('/api/auth/signin', {
+      const res = await fetch(`${backend}/api/auth/signin`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),

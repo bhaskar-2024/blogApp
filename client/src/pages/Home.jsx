@@ -4,10 +4,10 @@ import PostCard from '../components/PostCard';
 
 export default function Home() {
   const [posts, setPosts] = useState([]);
-
+  const backend = import.meta.env.VITE_BACKEND_URL;
   useEffect(() => {
     const fetchPosts = async () => {
-      const res = await fetch('/api/post/getPosts');
+      const res = await fetch(`${backend}/api/post/getPosts`);
       const data = await res.json();
       setPosts(data.posts);
     };
