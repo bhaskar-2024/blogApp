@@ -3,12 +3,6 @@ import { errorHandler } from "../utils/error.js";
 import bcryptjs from "bcryptjs"
 import jwt from "jsonwebtoken"
 
-const options = {
-  httpOnly: true,
-  secure: true,
-  sameSite: "None",
-  partitioned : true
-};
 
 export const signup = async (req, res, next) => {
     const { username, email, password } = req.body;
@@ -62,6 +56,12 @@ export const signup = async (req, res, next) => {
       );
   
       const { password: pass, ...rest } = validUser._doc;
+      const options = {
+        httpOnly: true,
+        secure: true,
+        sameSite: "None",
+        partitioned : true
+      };
   
       res
         .status(200)
@@ -82,6 +82,12 @@ export const signup = async (req, res, next) => {
           process.env.JWT_SECRET
         );
         const { password, ...rest } = user._doc;
+        const options = {
+          httpOnly: true,
+          secure: true,
+          sameSite: "None",
+          partitioned : true
+        };
         res
           .status(200)
           .cookie('access_token', token, options)
@@ -100,6 +106,12 @@ export const signup = async (req, res, next) => {
           profilePicture: googlePhotoUrl,
         });
         await newUser.save();
+        const options = {
+          httpOnly: true,
+          secure: true,
+          sameSite: "None",
+          partitioned : true
+        };
         const token = jwt.sign(
           { id: newUser._id, isAdmin: newUser.isAdmin },
           process.env.JWT_SECRET

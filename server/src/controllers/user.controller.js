@@ -2,12 +2,6 @@ import bcryptjs from 'bcryptjs';
 import { errorHandler } from '../utils/error.js';
 import User from '../models/user.model.js';
 
-const options = {
-  httpOnly: true,
-  secure: true,
-  sameSite: "None",
-  partitioned : true
-};
 
 
 export const updateUser = async (req, res, next) => {
@@ -72,6 +66,12 @@ export const deleteUser = async (req, res, next) => {
 
 export const signout = (req, res, next) => {
   try {
+    const options = {
+      httpOnly: true,
+      secure: true,
+      sameSite: "None",
+      partitioned : true
+    };
     res
       .clearCookie('access_token' ,options)
       .status(200)
