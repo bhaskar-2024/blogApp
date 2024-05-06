@@ -26,7 +26,9 @@ export default function DashboardComp() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const res = await fetch(`${backend}/api/user/getusers?limit=5`);
+        const res = await fetch(`${backend}/api/user/getusers?limit=5` , {
+          credentials: 'include',
+        });
         const data = await res.json();
         if (res.ok) {
           setUsers(data.users);
@@ -52,7 +54,9 @@ export default function DashboardComp() {
     };
     const fetchComments = async () => {
       try {
-        const res = await fetch(`${backend}/api/comments/getcomments?limit=5`);
+        const res = await fetch(`${backend}/api/comments/getcomments?limit=5` , {
+          credentials: 'include',
+        });
         const data = await res.json();
         if (res.ok) {
           setComments(data.comments);
