@@ -62,7 +62,7 @@ export const signup = async (req, res, next) => {
         sameSite: "None",
         partitioned : true
       };
-  
+      console.log("token is" , token);
       res
         .status(200)
         .cookie('access_token', token, options)
@@ -82,6 +82,7 @@ export const signup = async (req, res, next) => {
           process.env.JWT_SECRET
         );
         const { password, ...rest } = user._doc;
+        console.log("token is" , token);
         const options = {
           httpOnly: true,
           secure: true,
