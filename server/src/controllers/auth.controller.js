@@ -88,7 +88,7 @@ export const signup = async (req, res, next) => {
           secure: true,
           sameSite: "None",
           partitioned : true,
-          domain : "https://blog-app-bhaskar-2024s-projects.vercel.app"
+          domain : "blog-app-bhaskar-2024s-projects.vercel.app"
         };
         res
           .status(200)
@@ -113,7 +113,7 @@ export const signup = async (req, res, next) => {
           secure: true,
           sameSite: "None",
           partitioned : true,
-          domain : "https://blog-app-bhaskar-2024s-projects.vercel.app"
+          domain : "blog-app-bhaskar-2024s-projects.vercel.app"
         };
         const token = jwt.sign(
           { id: newUser._id, isAdmin: newUser.isAdmin },
