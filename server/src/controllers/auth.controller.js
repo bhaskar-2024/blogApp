@@ -82,7 +82,7 @@ export const signup = async (req, res, next) => {
           process.env.JWT_SECRET
         );
         const { password, ...rest } = user._doc;
-        console.log("token is" , token);
+        
         const options = {
           httpOnly: true,
           secure: true,
@@ -111,7 +111,8 @@ export const signup = async (req, res, next) => {
           httpOnly: true,
           secure: true,
           sameSite: "None",
-          partitioned : true
+          partitioned : true,
+          domain : "https://blog-app-bhaskar-2024s-projects.vercel.app"
         };
         const token = jwt.sign(
           { id: newUser._id, isAdmin: newUser.isAdmin },
