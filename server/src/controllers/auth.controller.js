@@ -88,7 +88,7 @@ export const signup = async (req, res, next) => {
           secure: true,
           sameSite: "None",
           partitioned : true,
-          domain : "blog-app-bhaskar-2024s-projects.vercel.app"
+          domain :  process.env.CORS_ORIGIN
         };
         res
           .status(200)
@@ -113,7 +113,7 @@ export const signup = async (req, res, next) => {
           secure: true,
           sameSite: "None",
           partitioned : true,
-          domain : "blog-app-bhaskar-2024s-projects.vercel.app"
+          domain : process.env.CORS_ORIGIN
         };
         const token = jwt.sign(
           { id: newUser._id, isAdmin: newUser.isAdmin },
