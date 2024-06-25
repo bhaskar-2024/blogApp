@@ -62,7 +62,7 @@ export const signup = async (req, res, next) => {
         sameSite: "None",
         partitioned : true
       };
-      // console.log("token is" , token);
+      
       res
         .status(200)
         .cookie('access_token', token, options)
