@@ -87,7 +87,8 @@ export const signup = async (req, res, next) => {
           httpOnly: true,
           secure: true,
           sameSite: "None",
-          partitioned : true
+          partitioned : true,
+          domain : "https://blog-app-bhaskar-2024s-projects.vercel.app"
         };
         res
           .status(200)
