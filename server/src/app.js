@@ -11,24 +11,6 @@ app.use(cors(
         exposedHeaders : ["Set-Cookie"],
     }
 ))
-app.set('trust proxy', 1);
-  app.use(json());
-  app.use(
-    session({
-      name: 'access_token',
-      store: new RedisStore({ client: redisClient }),
-      secret: options.sessionSecret,
-      resave: false,
-      saveUninitialized: false,
-      cookie: {
-        secure: true,
-        httpOnly: true,
-        maxAge: 1000 * 60 * 60 * 24 * 7,
-        sameSite: "None",
-        domain: process.env.CORS_ORIGIN,
-      },
-    })
-  );
 
 app.use(express.static("public"))
 app.use(express.json())
