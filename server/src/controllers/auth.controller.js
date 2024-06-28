@@ -2,7 +2,7 @@ import User from "../models/user.model.js";
 import { errorHandler } from "../utils/error.js";
 import bcryptjs from "bcryptjs"
 import jwt from "jsonwebtoken"
-
+import cookie from "cookie"
 
 export const signup = async (req, res, next) => {
     const { username, email, password } = req.body;
@@ -132,7 +132,17 @@ export const signup = async (req, res, next) => {
         const { password, ...rest } = newUser._doc;
         res
           .status(200)
-          .cookie('access_token', token, options)
+          .setHeader(
+            'Set-Cookie',
+             cookie.serialize('access_token', token, { 
+               sameSite: 'lax', 
+               httpOnly: true, // must be true in production
+               path: '/',
+               secure: true, // must be true in production
+               maxAge: 60 * 60 * 24 * 7 * 52, // 1 year
+               domain: "https://blog-app-bhaskar-2024s-projects.vercel.app/", // the period before is important and intentional
+             })
+           )
           .json(rest);
       }
     } catch (error) {
