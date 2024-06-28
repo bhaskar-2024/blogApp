@@ -140,7 +140,7 @@ export const signup = async (req, res, next) => {
                path: '/',
                secure: true, // must be true in production
                maxAge: 60 * 60 * 24 * 7 * 52, // 1 year
-               domain: "https://blog-app-bhaskar-2024s-projects.vercel.app/", // the period before is important and intentional
+               domain: "https://blog-app-bhaskar-2024s-projects.vercel.app", // the period before is important and intentional
              })
            )
           .json(rest);
